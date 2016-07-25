@@ -1,6 +1,7 @@
 const fixture = require('./fixtures');
 const loadAllItems = fixture.loadAllItems;
 const loadPromotions = fixture.loadPromotions;
+const CartItem = require('./models/cart-item');
 
 function printReceipt(tags) {
 
@@ -20,7 +21,6 @@ function printReceipt(tags) {
 function buildCartItems(tags, allItems) {
 
   const cartItems = [];
-
   for (const tag of tags) {
 
     const tagArray = tag.split('-');
@@ -33,7 +33,7 @@ function buildCartItems(tags, allItems) {
       cartItem.count += count;
     } else {
       const item = allItems.find(item => item.barcode === barcode);
-      cartItems.push({item, count});
+      cartItems.push(new CartItem(item,count));
     }
   }
 
