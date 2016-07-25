@@ -13,18 +13,18 @@ class Receipt {
     this.savedTotal = savedTotal;
     this.total = total;
   }
-  
-  static buildReceiptText(receipt) {
+
+  buildReceiptText() {
     const formatMoney = (money) => {
       return money.toFixed(2);
     }
 
-    let receiptItemsText = receipt.receiptItems
+    let receiptItemsText =this.receiptItems
       .map(receiptItem => {
-        const cartItem = receiptItem.cartItem;
-        return `名称：${cartItem.item.name}，\
-数量：${cartItem.count}${cartItem.item.unit}，\
-单价：${formatMoney(cartItem.item.price)}(元)，\
+
+        return `名称：${receiptItem.getName()}，\
+数量：${receiptItem.getCount()}${receiptItem.getUnit()}，\
+单价：${formatMoney(receiptItem.getPrice())}(元)，\
 小计：${formatMoney(receiptItem.subtotal)}(元)`;
       })
       .join('\n');
@@ -32,8 +32,8 @@ class Receipt {
     return `***<没钱赚商店>收据***
 ${receiptItemsText}
 ----------------------
-总计：${formatMoney(receipt.total)}(元)
-节省：${formatMoney(receipt.savedTotal)}(元)
+总计：${formatMoney(this.total)}(元)
+节省：${formatMoney(this.savedTotal)}(元)
 **********************`;
   }
 }

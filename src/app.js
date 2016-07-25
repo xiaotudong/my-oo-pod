@@ -9,7 +9,7 @@ function printReceipt(tags) {
   const cartItems = CartItem.buildCartItems(tags, Item.AllItems());
   const receiptItems = ReceiptItem.buildReceiptItems(cartItems,Promotion.AllPromotions());
   const receipt = new Receipt(receiptItems);
-  const receiptText = Receipt.buildReceiptText(receipt);
+  const receiptText = receipt.buildReceiptText();
 
   console.log(receiptText);
 }
